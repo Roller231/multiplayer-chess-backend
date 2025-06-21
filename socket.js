@@ -4,6 +4,15 @@ export default io => {
     let rooms = [];
     let inGameRooms = [];
 
+    // Полностью отключаем CORS проверку для Socket.IO
+    io.engine.on("headers", (headers, req) => {
+        headers["Access-Control-Allow-Origin"] = "*";
+        headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS";
+        headers["Access-Control-Allow-Headers"] = "*";
+    });
+
+
+
     io.on('connection', socket => {
 
         socket.on('connectUser', userId => {
